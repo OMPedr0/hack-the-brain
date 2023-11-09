@@ -7,8 +7,9 @@ function DefinitionsTab() {
     Name: 'Pedro Gil',
     Email: 'pedrogil@hackthebrain.com',
     Age: 20,
-    // Adicione outras informações do usuário aqui
   };
+
+  
   return (
     <div className="flex space-x-4">
       <UserInfoCard user={user} />

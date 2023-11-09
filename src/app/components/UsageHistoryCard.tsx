@@ -2,7 +2,8 @@ import React from 'react';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
 
 // Importar os estilos e componentes do Chart.js
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, ArcElement, LineElement, ChartData } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, ArcElement, LineElement, ChartData, BubbleDataPoint, Point } from 'chart.js';
+import Chart from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, ArcElement, LineElement);
 
@@ -15,11 +16,12 @@ const neonColors = [
 ];
 
 interface BarChartProps {
-    data: ChartJS.ChartData;
+    data: Chart.ChartData;
 }
 
+
 // Componente de gráfico reutilizável
-function BarChart({ data }: BarChartProps) {
+function BarChart({ data }: { data: Chart.ChartData<"bar", (number | [number, number] | Point | BubbleDataPoint | null)[], unknown> }) {
     return (
         <div className="bg-bgfooter m-fit p-4 rounded shadow-md text-black">
             <Bar data={data} />
@@ -27,7 +29,8 @@ function BarChart({ data }: BarChartProps) {
     );
 }
 
-function DoughnutChart({ data }: BarChartProps) {
+
+function DoughnutChart({ data }: { data: Chart.ChartData<"doughnut", (number | [number, number] | Point | BubbleDataPoint | null)[], unknown> }) {
     return (
         <div className="bg-bgfooter p-4 rounded shadow-md text-black">
             <Doughnut data={data} />
@@ -35,7 +38,7 @@ function DoughnutChart({ data }: BarChartProps) {
     );
 }
 
-function LineChart({ data }: BarChartProps) {
+function LineChart({ data }: { data: Chart.ChartData<"line", (number | [number, number] | Point | BubbleDataPoint | null)[], unknown> }) {
     return (
         <div className="bg-bgfooter p-4 rounded shadow-md text-black">
             <Line data={data} />
