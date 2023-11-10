@@ -6,64 +6,38 @@ import { FaCog } from 'react-icons/fa';
 
 import BrowserTab from './components/BrowserTab';
 import DefinitionsTab from './components/DefinitionsTab';
+import TabButton from './components/TabButton';
+
+type TabType = 'browser' | 'definitions';
 
 export default function Home() {
-  const [selectedTab, setSelectedTab] = useState<'browser' | 'definitions'>('browser');
+  const [selectedTab, setSelectedTab] = useState<TabType>('browser');
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-zinc-300">
       <div className="flex-grow p-4">
         <Tab.Group>
           <Tab.List className="flex space-x-4 bg-white rounded-xl shadow-md">
-            {['browser', 'definitions'].map((tab) => (
-              <Tab key={tab}>
-                {({ selected }) => (
-                  <button
-                    className={getTabClasses(selected, tab)}
-                    onClick={() => setSelectedTab(tab as 'browser' | 'definitions')}
-                  >
-                    {tab === 'browser' ? (
-                      <>
-                        Browser
-                        {selected && <span className="ml-1"></span>}
-                      </>
-                    ) : (
-                      <>
-                        <FaCog size={20} className="absolute bottom-4 left-4" />
-                        {selected && <span className="ml-1"></span>}
-                      </>
-                    )}
-                  </button>
-                )}
-              </Tab>
-            ))}
+            <TabButton
+              tab="browser"
+              selectedTab={selectedTab}
+              onSelectTab={() => setSelectedTab('browser')}
+              iconUrl="https://firebasestorage.googleapis.com/v0/b/testes-full-dev.appspot.com/o/OIG.png?alt=media&token=3f9ae42a-25e8-402e-be01-057f18ef098f"
+            />
+            <TabButton
+              tab="definitions"
+              selectedTab={selectedTab}
+              onSelectTab={() => setSelectedTab('definitions')}
+              icon={<FaCog size={20}/>}
+            />
           </Tab.List>
 
           <Tab.Panels className="mt-4">
-            <Tab.Panel key="browser">
-              <BrowserTab />
-            </Tab.Panel>
-            <Tab.Panel key="definitions">
-              <DefinitionsTab />
-            </Tab.Panel>
+            {selectedTab === 'browser' ? <BrowserTab /> : null}
+            {selectedTab === 'definitions' ? <DefinitionsTab /> : null}
           </Tab.Panels>
         </Tab.Group>
       </div>
     </div>
   );
-}
-
-function getTabClasses(selected: boolean, tab: string) {
-  if (tab === 'browser' || tab === 'definitions') {
-    return `
-      py-2.5 text-sm leading-5 font-medium text-gray-700 rounded-lg focus:outline-none
-      ${
-        selected
-          ? 'bg-white shadow' + (tab === 'definitions' ? ' text-gray-500 hover-text-gray-700' : '')
-          : 'text-gray-500 hover-text-gray-700'
-      }
-    `;
-  } else {
-    throw new Error('Invalid tab value');
-  }
 }

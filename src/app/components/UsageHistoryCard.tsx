@@ -87,27 +87,60 @@ const UsageHistoryCard: React.FC = () => {
         ],
     };
 
-    return (
-        <div className="bg-gray-300 text-black p-4 rounded shadow-md w-fit">
-            <h2 className="text-xl font-semibold">Histórico de Utilização de Aplicações</h2>
-            <div className="flex mt-4 space-x-4">
-                <div className="p-4 w-fit rounded shadow-md bg-gray-400 text-black">
-                    <h3 className="text-lg font-light">Aplicativos:</h3>
-                    <ul>
-                        {apps.map((app) => (
-                            <li key={app} className="mt-2 font-serif font-bold">
-                                {app}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+    const currentWeekData = [50, 30, 70, 20, 90]; // Data for the current week
+    const lastWeekData = [40, 35, 60, 25, 85]; // Data for the last week
 
-                <BarChart data={barChartData} />
-                <DoughnutChart data={doughnutChartData} />
-                <LineChart data={lineChartData} />
+    const combinedBarChartData = {
+        labels: apps,
+        datasets: [
+            {
+                label: 'Uso Mensal (Last Week)',
+                data: lastWeekData,
+                backgroundColor: 'rgba(255, 68, 68, 0.6)',
+                borderColor: 'rgba(255, 68, 68, 0.6)',
+                borderWidth: 1,
+            },
+            {
+                label: 'Uso Mensal (Current Week)',
+                data: currentWeekData,
+                backgroundColor: 'rgba(102, 255, 102, 0.6)',
+                borderColor: 'rgba(102, 255, 102, 0.6)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    return (
+        <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4">Histórico de Utilização de Aplicações</h2>
+          <div className="flex flex-wrap space-y-4 md:space-y-0 md:space-x-4">
+            <div className="bg-white p-4 rounded-lg shadow-md flex-1">
+              <h3 className="text-lg font-semibold mb-2">Aplicativos:</h3>
+              <ul>
+                {apps.map((app) => (
+                  <li key={app} className="mb-1">
+                    {app}
+                  </li>
+                ))}
+              </ul>
             </div>
+      
+            <BarChart data={barChartData} />
+            <DoughnutChart data={doughnutChartData} />
+            <LineChart data={lineChartData} />
+          </div>
+      
+          <div className="bg-bgfooter mt-4 p-4 rounded-lg shadow-lg text-white">
+            <h3 className="text-lg font-semibold">Diferença de Semanas</h3>
+            <div className="mt-4">
+              <LineChart data={combinedBarChartData} />
+            </div>
+          </div>
         </div>
-    );
+      );
+      
+      
+      
 };
 
 export default UsageHistoryCard;

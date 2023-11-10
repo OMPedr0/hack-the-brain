@@ -4,7 +4,6 @@ interface User {
   Name: string;
   Email: string;
   Age: number;
-  // Adicione outras informações do usuário aqui
 }
 
 interface UserInfoCardProps {
@@ -12,7 +11,6 @@ interface UserInfoCardProps {
 }
 
 function UserInfoCard({ user }: UserInfoCardProps) {
-  // Crie uma matriz de propriedades do usuário para exibi-las dinamicamente
   const userProperties = Object.entries(user);
 
   return (

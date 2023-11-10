@@ -12,10 +12,15 @@ function DefinitionsTab() {
   
   return (
     <div className="flex space-x-4">
-      <UserInfoCard user={user} />
-      <UsageHistoryCard />
+      <div className="w-1/3">
+        <UserInfoCard user={user} />
+      </div>
+      <div className="w-5/6">
+        <UsageHistoryCard />
+      </div>
     </div>
   );
+  
 }
 
 export default DefinitionsTab;
