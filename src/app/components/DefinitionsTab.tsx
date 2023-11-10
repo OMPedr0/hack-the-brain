@@ -6,16 +6,16 @@ function DefinitionsTab() {
   const user = {
     Name: 'Pedro Gil',
     Email: 'pedrogil@hackthebrain.com',
-    Age: 20,
+    Company: 'Hack The Brain',
   };
 
   
   return (
     <div className="flex space-x-4">
-      <div className="w-1/3">
+      <div className="w-1/4">
         <UserInfoCard user={user} />
       </div>
-      <div className="w-5/6">
+      <div >
         <UsageHistoryCard />
       </div>
     </div>
